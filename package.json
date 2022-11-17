@@ -7,7 +7,8 @@
     "clean": "pcf-scripts clean",
     "rebuild": "pcf-scripts rebuild",
     "start": "pcf-scripts start",
-    "refreshTypes": "pcf-scripts refreshTypes"
+    "refreshTypes": "pcf-scripts refreshTypes",
+    "cdsify-gen": "cdsify-gen"
   },
   "dependencies": {
     "@fluentui/react": "8.29.0",
@@ -27,6 +28,7 @@
     "@types/react": "^16.8",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
+    "cdsify-gen": "^1.0.13",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
