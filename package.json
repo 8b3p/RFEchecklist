@@ -8,7 +8,7 @@
     "rebuild": "pcf-scripts rebuild",
     "start": "pcf-scripts start",
     "refreshTypes": "pcf-scripts refreshTypes",
-    "cdsify-gen": "cdsify-gen"
+    "cdsify-gen": "npx cdsify-gen" // before doing this, u need an auth token, get it with npx node-cds-auth [tennant] [environment], E.g npx node-cds-auth axagdev1.crm.dynamics.com
   },
   "dependencies": {
     "@fluentui/react": "8.29.0",
@@ -28,7 +28,6 @@
     "@types/react": "^16.8",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
-    "cdsify-gen": "^1.0.13",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
