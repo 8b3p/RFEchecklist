@@ -1,0 +1,36 @@
+.question-text {
+  white-space: pre-wrap;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  margin-right: 0.5rem;
+}
+.question {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0.3rem 0;
+}
+
+.question:last-child {
+  border-bottom: none;
+}
+
+.choice-group {
+  border-left: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+}
+
+.ms-ChoiceFieldGroup-flexContainer {
+  /* this is the container for the radio buttons */
+  display: flex;
+}
+.ms-ChoiceFieldGroup-flexContainer div {
+  /* this is the div that contains the radio button */
+  width: 3em;
+  align-items: end;
+  justify-content: end;
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+}

@@ -1,0 +1,21 @@
+.section-conatiner {
+  margin: 1rem;
+  margin-block: 3rem;
+}
+
+.section-conatiner:first-child {
+  margin-block-start: 1rem;
+}
+
+.section-conatiner:last-child {
+  margin-block-end: 1rem;
+}
+
+.choice-group-header {
+  text-align: end;
+  width: 3rem;
+}
+
+/* .section-header {
+  this is the section header
+} */

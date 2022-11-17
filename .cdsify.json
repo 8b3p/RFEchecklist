@@ -1,0 +1,14 @@
+{
+  "entities": [
+    "axa_checklistresult",
+    "axa_checklist",
+    "axa_requestforexpenditure"
+  ],
+  "actions": [ 
+    
+  ],
+  "functions": [],
+  "output": {
+    "outputRoot": "./checklist/cds-generated"
+  }
+}
