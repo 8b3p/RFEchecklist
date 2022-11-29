@@ -89,7 +89,7 @@ export default class CdsService {
         "axa_Checklist@odata.bind":
           "/axa_checklists(" + checklistResult.checklistId + ")",
         "axa_RFE@odata.bind":
-          "/axa_requestforexpenditures(" + checklistResult.rfeId + ")",
+          "/axa_requestforexpenditures(" + checklistResult.rfeId + ")", //* to make a relationship in the dataverse, use the following format: "<Schema Name>@odata.bind": "/<Plural Logical Name>(<GUID>)"
       };
 
       const response = await this.context.webAPI.createRecord(
