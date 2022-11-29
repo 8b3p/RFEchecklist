@@ -120,6 +120,52 @@ export default class CdsService {
       return error as Error;
     }
   }
+
+  private EncodeFile(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = _f => resolve((<string>reader.result).split(",")[1]);
+      reader.onerror = error => reject(error);
+      reader.readAsDataURL(file);
+    });
+  }
+  private CollectionNameFromLogicalName(entityLogicalName: string): string {
+    if (entityLogicalName[entityLogicalName.length - 1] != "s") {
+      return `${entityLogicalName}s`;
+    } else {
+      return `${entityLogicalName}es`;
+    }
+  }
+
+  public async saveFile(
+    file: File,
+    entityID: string,
+    entityLogicalName: string
+  ): Promise<Error | ComponentFramework.LookupValue> {
+    try {
+      const fileContent = await this.EncodeFile(file);
+      const data = {
+        subject: `Attachment: ${file.name}`,
+        filename: file.name,
+        filesize: file.size,
+        mimetype: file.type,
+        objecttypecode: entityLogicalName,
+        documentbody: fileContent,
+        [`objectid_${entityLogicalName}@odata.bind`]: `/${this.CollectionNameFromLogicalName(
+          entityLogicalName
+        )}(${entityID})`,
+      };
+
+      const response = await this.context.webAPI.createRecord(
+        "annotation",
+        data
+      );
+      return response;
+    } catch (error: any) {
+      console.dir(error);
+      return error as Error;
+    }
+  }
 }
 
 export const cdsServiceName = "CdsService";

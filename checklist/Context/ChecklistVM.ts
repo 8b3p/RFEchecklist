@@ -13,14 +13,16 @@ export default class ChecklistVM {
   public context: ComponentFramework.Context<IInputs>;
   private cdsService: CdsService;
   public checklistType: axa_checklisttype = axa_checklisttype.Safety;
-  public checklistResults: CheckListResults = {}; //*this is mapped by the checklistId and not the
+  public checklistResults: CheckListResults = {}; //*this is mapped by the checklistId and not the checklistResultId
   public rfeGuid: string;
 
   constructor(
     serviceProvider: ServiceProvider,
-    checklistType: axa_checklisttype
+    checklistType?: axa_checklisttype
   ) {
-    this.checklistType = checklistType;
+    if (checklistType) {
+      this.checklistType = checklistType;
+    }
     makeAutoObservable(this);
     this.serviceProvider = serviceProvider;
     this.cdsService = serviceProvider.get<CdsService>(cdsServiceName);
@@ -32,7 +34,7 @@ export default class ChecklistVM {
   }
 
   /**
-   * @return an array of the sections
+   * @returns an array of the sections
    */
   public get Sections() {
     return Object.keys(this.ChecklistBySection);
@@ -57,7 +59,7 @@ export default class ChecklistVM {
    * you would call it when the PCF first mounts, or whenever a full refresh of the data is needed
    */
   //! I AM EXPECTING THE DATA TO BE SORTED, i can surely sort it here easy but i got it sorted the first time so i didn't wonna waste time making the sorting function.
-  public async fetchChecklist() {
+  public async fetchChecklist(): Promise<void> {
     this.Checklist = {};
     this.checklistResults = {};
 
@@ -101,8 +103,25 @@ export default class ChecklistVM {
     }); // populates the data to the VM
   }
 
+  public async saveFile(
+    file: File,
+    entityID: string,
+    entityLogicalName: string
+  ): Promise<ComponentFramework.LookupValue | undefined> {
+    const response = await this.cdsService.saveFile(
+      file,
+      entityID,
+      entityLogicalName
+    );
+    if (response instanceof Error) {
+      console.error(response);
+      return;
+    }
+    return response;
+  }
+
   /**
-   *
+   * this function saves the answer of the checklist question
    * @param result the result you want to save
    * @param checklistId the checklist or (question) you are answering. {GUID}
    * @returns nothing, updates the data in the VM.
@@ -110,14 +129,14 @@ export default class ChecklistVM {
   public async saveChecklistAnswers(
     result: axa_checklistresult_axa_checklistresult_axa_result,
     checklistId: string
-  ) {
+  ): Promise<void> {
     //* check if a result already exists for the checklist
     const existingResult = Object.values(this.checklistResults).find(
       item => item.checklistId === checklistId
     );
 
     if (existingResult) {
-      // if it does, update the result
+      // if it does exist, update the result
       const newChecklistResult: CheckListResult = {
         checklistResultId: existingResult.checklistResultId,
         checklistId: existingResult.checklistId,
@@ -129,14 +148,15 @@ export default class ChecklistVM {
         newChecklistResult
       );
       if (response instanceof Error) {
+        // check if response is an error
         console.dir(response);
         return;
       }
       this.checklistResults[newChecklistResult.checklistId] =
         newChecklistResult;
     } else {
-      // if it doesn't, create a new result
-      const newResult = {
+      // if it doesn't exist, create a new result
+      const newResult: CheckListResult = {
         result,
         checklistId,
         name: "",
@@ -144,6 +164,7 @@ export default class ChecklistVM {
       } as CheckListResult;
       const response = await this.cdsService.createChecklistResult(newResult);
       if (response instanceof Error) {
+        // check if response is an error
         console.dir(response);
         return;
       }

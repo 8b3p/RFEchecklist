@@ -8,7 +8,7 @@
     "rebuild": "pcf-scripts rebuild",
     "start": "pcf-scripts start",
     "refreshTypes": "pcf-scripts refreshTypes",
-    "cdsify-gen": "npx cdsify-gen" // before doing this, u need an auth token, get it with npx node-cds-auth [tennant] [environment], E.g npx node-cds-auth axagdev1.crm.dynamics.com
+    "cdsify-gen": "npx cdsify-gen" 
   },
   "dependencies": {
     "@fluentui/react": "8.29.0",

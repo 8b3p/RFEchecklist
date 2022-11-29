@@ -9,7 +9,7 @@ import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import React = require("react");
 import { axa_checklistresult_axa_checklistresult_axa_result } from "../cds-generated/enums/axa_checklistresult_axa_checklistresult_axa_result";
-import { useChecklistVM } from "../ViewModels/context";
+import { useChecklistVM } from "../Context/context";
 import "./Question.css";
 
 interface props {

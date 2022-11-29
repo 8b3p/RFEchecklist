@@ -2,8 +2,8 @@ import { observer } from "mobx-react-lite";
 import { ServiceProvider } from "pcf-react";
 import * as React from "react";
 import { IInputs } from "../generated/ManifestTypes";
-import ChecklistVM, { checklistVMserviceName } from "../ViewModels/ChecklistVM";
-import ChecklistVMProvider from "../ViewModels/context";
+import ChecklistVM, { checklistVMserviceName } from "../Context/ChecklistVM";
+import ChecklistVMProvider from "../Context/context";
 import Section from "./Section";
 
 interface props {

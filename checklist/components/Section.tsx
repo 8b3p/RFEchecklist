@@ -1,7 +1,7 @@
 import { Stack, Text } from "@fluentui/react";
 import { observer } from "mobx-react-lite";
 import React = require("react");
-import { useChecklistVM } from "../ViewModels/context";
+import { useChecklistVM } from "../Context/context";
 import Question from "./Question";
 import "./Section.css";
 
