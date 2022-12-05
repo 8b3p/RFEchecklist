@@ -4,7 +4,9 @@ import {
   axa_ChecklistResultAttributes,
   axa_checklistresultMetadata,
 } from "../cds-generated/entities/axa_ChecklistResult";
+import { axa_requestforexpenditureMetadata } from "../cds-generated/entities/axa_RequestforExpenditure";
 import { axa_checklisttype } from "../cds-generated/enums/axa_checklisttype";
+import { axa_rfestatus } from "../cds-generated/enums/axa_rfestatus";
 import { IInputs } from "../generated/ManifestTypes";
 import { CheckListResult } from "../types/CheckListResult";
 import { Modify } from "../types/Modify";
@@ -134,6 +136,26 @@ export default class CdsService {
       return `${entityLogicalName}s`;
     } else {
       return `${entityLogicalName}es`;
+    }
+  }
+
+  public async retrieveRfeStatus(
+    rfeId: string
+  ): Promise<axa_rfestatus | Error> {
+    try {
+      const response = await this.context.webAPI.retrieveRecord(
+        axa_requestforexpenditureMetadata.logicalName,
+        rfeId,
+        "?$select=axa_rfestatus"
+      );
+      if (response) {
+        return response.axa_rfestatus as axa_rfestatus;
+      } else {
+        return new Error("No response from CDS");
+      }
+    } catch (e: any) {
+      console.error(e.message);
+      return new Error(e.message);
     }
   }
 

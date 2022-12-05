@@ -92,6 +92,7 @@ const Question = ({ checklistId }: props) => {
         <Spinner style={{ width: "9rem" }} />
       ) : (
         <ChoiceGroup
+          disabled={vm.isControlDisabled}
           className='choice-group'
           selectedKey={selectedKey.key}
           defaultSelectedKey={selectedKey.key}
