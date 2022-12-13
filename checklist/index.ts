@@ -11,7 +11,7 @@ export class checklist extends StandardControlReact<IInputs, IOutputs> {
   checklistType: axa_checklisttype | undefined;
   constructor() {
     //log the version on the console
-    console.log("Version: 1.0.1 - 2022-12-5");
+    console.log("Version: 1.0.2 - 2022-12-13");
     super();
     this.renderOnParametersChanged = false;
     this.initServiceProvider = (serviceProvider: ServiceProvider) => {
